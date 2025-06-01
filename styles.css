@@ -1,0 +1,63 @@
+/* styles.css */
+
+/* 会话条目本身（父容器） */
+div.conversation[data-test-id="conversation"] {
+  position: relative; /* 用于可能的内部绝对定位或确保层叠上下文 */
+  display: flex;       /* Gemini 内部可能已经是 flex，我们的按钮会融入其中 */
+  align-items: center; /* 垂直居中条目内的元素 */
+}
+
+/* 星号按钮的基础样式 */
+.gemini-fav-star-button {
+  align-items: center; /* 垂直居中内部的 SVG/img */
+  justify-content: center; /* 水平居中内部的 SVG/img */
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+  margin-right: 4px; /* 与右侧的“三点菜单”的间距 */
+  cursor: pointer;
+  z-index: 10; /* 比周围元素层级稍高，避免被遮挡 */
+  box-sizing: content-box;
+  color: #9aa0a6; /* 默认（未收藏时）的轮廓星标颜色 - 一个中性灰色 */
+  border-radius: 50%; /* 给按钮本身一个圆形背景hover效果 */
+  flex-shrink: 0; /* 防止按钮在flex布局中被压缩 */
+}
+
+/* 默认状态：未收藏的星标按钮初始时是隐藏的 */
+.gemini-fav-star-button:not(.is-favorited) {
+  display: none;
+}
+
+/* 当鼠标悬停在 *父级* 会话条目上时，显示其 *未收藏的* 星标按钮 */
+div.conversation[data-test-id="conversation"]:hover .gemini-fav-star-button:not(.is-favorited) {
+  display: inline-flex; /* 使用 inline-flex 使其在行内并能控制子元素对齐 */
+}
+
+/* 已收藏的星标按钮：始终显示，并应用特定颜色 */
+.gemini-fav-star-button.is-favorited {
+  display: inline-flex; /* 覆盖默认的 display: none */
+  color: #ADD8E6; /* 浅蓝色 - 收藏状态的颜色 (Baby Blue) */
+  /* 或者浅绿色: color: #90ee90; */
+}
+
+/* 按钮本身的悬停效果（背景变化） */
+.gemini-fav-star-button:hover {
+  background-color: rgba(0, 0, 0, 0.08); /* 轻微的背景反馈 */
+}
+
+/* 可选：已收藏星标在悬停时颜色微调（如果需要与默认收藏色不同） */
+/* .gemini-fav-star-button.is-favorited:hover {
+  color: #A0D2E2;
+} */
+
+/* 未收藏星标（此时因父级悬停已显示）在自身悬停时的颜色变化 */
+.gemini-fav-star-button:not(.is-favorited):hover {
+  color: #5f6368; /* 轮廓变为深一点的灰色 */
+}
+
+/* 星号按钮内部的SVG/img图标大小 */
+.gemini-fav-star-button img {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}

@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Gemini Chat Favorites",
+  "version": "0.1",
+  "description": "Adds a favorite button to Gemini chat history items.",
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://gemini.google.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/star-outline.svg", "icons/star-filled.svg"],
+      "matches": ["https://gemini.google.com/*"]
+    }
+  ]
+}
